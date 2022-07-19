@@ -5,6 +5,21 @@ import Image from "next/image";
 import { urlFor } from "../utils/image";
 import Link from "next/link";
 
+
+const myPortableTextComponents = {
+  types: {
+    listingBlock: ({ value }) => {
+      return (
+        <div className="no-prose">
+          <div>Icon: {value.icon}</div>
+          <div>Icon Size: {value.iconSize}</div>
+          {value.body && <PortableText value={value.body} />}
+        </div>
+      )
+    },
+  },
+}
+
 // index.js
 const Index = ({ hero }) => {
   return (
@@ -18,7 +33,7 @@ const Index = ({ hero }) => {
         />
         <h1>{hero.title}</h1>
         <h2>{hero.subTitle}</h2>
-        {hero.text && <PortableText value={hero.text} />}
+        {hero.text && <PortableText value={hero.text} components={myPortableTextComponents} />}
         {hero.buttons && (<div>
           {hero.buttons.map(b => {
             return <Link href={b.url}><a>{b.linkText}</a></Link>
